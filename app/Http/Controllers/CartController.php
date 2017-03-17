@@ -19,20 +19,32 @@ class CartController extends Controller
      */
     public function index()
     {   
-       
+        $data = Session::all()['cart'];
+    $find = array_search('BBTCG', array_column($data, 'id'));
+   
+
         if (session::all()['cart']) {
             $data = Session::all()['cart'];
             //dd( $data[0]['Name']);
             $count = 0;
+            $countVat = 0;
+            $countExkl = 0;
             foreach ($data as $key => $value) {
-                if($value['Amount'] >= '1'){
+                if ($value['Amount'] >= '1') {
                     $count += $value['Price'] * $value['Amount'];
+                    $countVat += $value['Vatsum'] * $value['Amount'];
+                    $countExkl += $value['Priceexklmoms'] * $value['Amount'];
+                } elseif ($value['Amount'] == '0') {
+                    $count -= $value['Price'] * $value['Amount'];
+                    $countVat -= $value['Vatsum'] * $value['Amount'];
+                    $countExkl -= $value['Priceexklmoms'] * $value['Amount'];
                 } else {
                     $count += $value['Price'];
+                    $countVat -= $value['Vatsum'];
+                    $countExkl -= $value['Priceexklmoms'];
                 }  
-            
             }
-            return view('cart')->with('data', $data)->withAuthor($count);
+            return view('cart')->with('data', $data)->withTotal($count)->withVat($countVat)->withExkl($countExkl);
         } else {
             return view('carte');
         }
@@ -90,6 +102,8 @@ class CartController extends Controller
         foreach ($data as $key => $value) {
             if ($value['Amount'] >= '1') {
                 $count += $value['Price'] * $value['Amount'];
+            } elseif ($value['Amount'] == '0') {
+                 $count -= $value['Price'] * $value['Amount'];
             } else {
                 $count += $value['Price'];
             }  
@@ -118,7 +132,22 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+        $input = $this->request;
+        $update = $input->update;
+        $sessionAll = Session::all()['cart'];
+        $find = array_search($id, array_column($sessionAll, 'id'));
+        if ($update === 'addone') {
+            $amount = $sessionAll[$find]['Amount'] + 1;
+            Session::put('cart.'.$find.'.Amount', $amount);
+        } elseif ($sessionAll[$find]['Amount'] <= '1') {
+            Session::put('cart.'.$find.'.Amount', 1);
+        } else {
+            $amount = $sessionAll[$find]['Amount'] - 1;
+            Session::put('cart.'.$find.'.Amount', $amount);
+        }
+        
+        $data = Session::all()['cart'];
+        return $data;
     }
 
     /**
@@ -131,7 +160,7 @@ class CartController extends Controller
     {
         $sessionAll = Session::all()['cart'];
         $find = array_search($id, array_column($sessionAll, 'id'));
-        Session::forget('cart.'.$find);
+        Session::put('cart.'.$find.'.Amount', '0');
         $data = $sessionAll = Session::all()['cart'];
         return $data;
     }

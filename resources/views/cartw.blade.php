@@ -13,12 +13,13 @@
         <tbody class="products">
 
         @foreach ($data as $product)
+        	@if ($product['Amount'] > 0)
 			<tr>
                 <td>{{$product['Name']}}</td>
                 <td>{{$product['Amount']}}</td>
                 <td>{{$product['Price']}}</td>
             </tr>
-
+			@endif
         @endforeach
      		<tr>
                 <td><b>Total Price</b></td>

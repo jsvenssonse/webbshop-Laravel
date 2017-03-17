@@ -52,9 +52,52 @@ $( document ).ready(function() {
                 console.log("Error");
             }
         }); 
-        //showBigCart();
+        showBigCart();
     });
+    $( '.removeone' ).click(function() {
+        var productId = $( this ).attr('code');
+        console.log(productId);
+        $.ajax({
+            url: "http://localhost:8000/update/" + productId,
+            type:"POST",
+            beforeSend: function (xhr) {
+                var token = $('meta[name="csrf_token"]').attr('content');
 
+                if (token) {
+                      return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                }
+            },
+            data: {update : 'removeone'},
+            success:function(data){
+                console.log(data);
+                $( "clearfix" ).addClass( "open" );
+            },error:function(){ 
+                console.log("Error");
+            }
+        }); 
+    });
+    $( '.addone' ).click(function() {
+        var productId = $( this ).attr('code');
+        console.log(productId);
+        $.ajax({
+            url: "http://localhost:8000/update/" + productId,
+            type:"POST",
+            beforeSend: function (xhr) {
+                var token = $('meta[name="csrf_token"]').attr('content');
+
+                if (token) {
+                      return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                }
+            },
+            data: {update : 'addone'},
+            success:function(data){
+                console.log(data);
+                $( "clearfix" ).addClass( "open" );
+            },error:function(){ 
+                console.log("Error");
+            }
+        }); 
+    });
     function addToSession(products, id){
         var url = $(this).attr("data-link");
         $.ajax({

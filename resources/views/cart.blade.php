@@ -9,31 +9,51 @@
                 <th>Product</th>
                 <th>Amount</th>
                 <th>Price</th>
-                <th></th>
+                <th>Code</th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="products">
 
         @foreach ($data as $product)
-			<tr>
+            @if ($product['Amount'] > 0)
+            <tr>
                 <td>{{$product['Name']}}</td>
                 <td>{{$product['Amount']}}</td>
                 <td>{{$product['Price']}}</td>
-                <td>Antal</td>
-                <td><div class="btn btn-primary remove" code="{{$product['id']}}" data-link="{{ url('/test') }}" data-token="{{ csrf_token() }}">Remove</div></td>
+                <td>{{$product['id']}}</td>
+                    
+                
+                <td>
+                    <a href="/cart" class="btn btn-primary addone" code="{{$product['id']}}" data-link="{{ url('/cart') }}" data-token="{{ csrf_token() }}">+</a> 
+                    <a href="/cart" class="btn btn-primary removeone" code="{{$product['id']}}" data-link="{{ url('/cart') }}" data-token="{{ csrf_token() }}">-</a>
+                    <a href="/cart" class="btn btn-primary remove" code="{{$product['id']}}" data-link="{{ url('/cart') }}" data-token="{{ csrf_token() }}">Remove</a>
+                </td>
             </tr>
-
+            @endif
         @endforeach
-
-     		<tr>
+            <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><b>Total Price</b></td>
-                <td>{{$author}}</td>
+                <td><b>Vat</b></td>
+                <td>{{$vat}}</td>
             </tr>
-			
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Excl.VAT</b></td>
+                <td>{{$exkl}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Total Price</b></td>               
+                <td>{{$total}}</td>
+            </tr>
+            
         </tbody>
     </table>
 </div>

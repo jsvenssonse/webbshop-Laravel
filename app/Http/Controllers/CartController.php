@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Cart;
 use Session;
+
 class CartController extends Controller
 {
-    public function __construct(Request $request) {
+    public function __construct(Request $request)
+    {
         $this->request = $request;
     }
     /**
@@ -18,9 +20,9 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $data = Session::all()['cart'];
-    $find = array_search('BBTCG', array_column($data, 'id'));
+        $find = array_search('BBTCG', array_column($data, 'id'));
    
 
         if (session::all()['cart']) {
@@ -42,7 +44,7 @@ class CartController extends Controller
                     $count += $value['Price'];
                     $countVat -= $value['Vatsum'];
                     $countExkl -= $value['Priceexklmoms'];
-                }  
+                }
             }
             return view('cart')->with('data', $data)->withTotal($count)->withVat($countVat)->withExkl($countExkl);
         } else {
@@ -67,7 +69,7 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store()
-    {   
+    {
         $input = $this->request;
         $addCart = $input->data;
         $serchId = $input->id;
@@ -80,7 +82,6 @@ class CartController extends Controller
                 $nr1 = $sessionAll[$find]['Amount'];
                 Session::put('cart.'.$find.'.Amount', $addCart['Amount']+$nr1);
             }
-            
         } else {
             Session::push('cart', $addCart);
         }
@@ -103,10 +104,10 @@ class CartController extends Controller
             if ($value['Amount'] >= '1') {
                 $count += $value['Price'] * $value['Amount'];
             } elseif ($value['Amount'] == '0') {
-                 $count -= $value['Price'] * $value['Amount'];
+                $count -= $value['Price'] * $value['Amount'];
             } else {
                 $count += $value['Price'];
-            }  
+            }
         }
        
         return view('cartw')->with('data', $data)->withAuthor($count);

@@ -21,16 +21,16 @@ class CartController extends Controller
      */
     public function index()
     {
-        $data = Session::all()['cart'];
-        $find = array_search('BBTCG', array_column($data, 'id'));
-   
-
+        
         if (session::all()['cart']) {
+            //Get sessions data "cart"
             $data = Session::all()['cart'];
-            //dd( $data[0]['Name']);
-            $count = 0;
-            $countVat = 0;
-            $countExkl = 0;
+
+            $count = 0; //count price
+            $countVat = 0; //count var
+            $countExkl = 0; //count price -vat
+
+            //loop session and count prices
             foreach ($data as $key => $value) {
                 if ($value['Amount'] >= '1') {
                     $count += $value['Price'] * $value['Amount'];
@@ -70,9 +70,12 @@ class CartController extends Controller
      */
     public function store()
     {
+        //Get data from AJAX
         $input = $this->request;
         $addCart = $input->data;
         $serchId = $input->id;
+
+        //Check of cart exists if not create, else push new data, else update with new amount
         if (session::exists('cart')) {
             $sessionAll = Session::all()['cart'];
             $find = array_search($serchId, array_column($sessionAll, 'id'));
@@ -97,8 +100,9 @@ class CartController extends Controller
      */
     public function show(Request $request)
     {
+        //retun data to the cart widget with counted price without vat
         $data = Session::all()['cart'];
-        //dd( $data[0]['Name']);
+
         $count = 0;
         foreach ($data as $key => $value) {
             if ($value['Amount'] >= '1') {
@@ -133,6 +137,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Update amount in Cart
         $input = $this->request;
         $update = $input->update;
         $sessionAll = Session::all()['cart'];
@@ -159,6 +164,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
+        //If remove product from cart set amount to 0
         $sessionAll = Session::all()['cart'];
         $find = array_search($id, array_column($sessionAll, 'id'));
         Session::put('cart.'.$find.'.Amount', '0');

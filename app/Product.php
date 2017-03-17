@@ -8,7 +8,7 @@ class Product extends Model
 {
     public function GetAll()
     {
-        //http://localhost:8000/data/exempelartiklar.json
+        // Get all products and return them to new array
         $getJsonData = file_get_contents("data/exempelartiklar.json");
         $orginalData = json_decode($getJsonData, true);
         $data = array();

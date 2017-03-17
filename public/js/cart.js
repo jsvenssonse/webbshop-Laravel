@@ -1,10 +1,6 @@
 $( document ).ready(function() {
-    //$( "clearfix" ).addClass( "open" );
-    console.log( "ready!" );
+
     var cart = [];
-
-           
-
     $( '.submitToCart' ).click(function() {
         var productId = $( this ).attr('data');
         var productAmount = $('#'+productId).val();

@@ -32,3 +32,8 @@ body{
 	min-height: 100px;
 	min-width: 100px;
 }
+.padding{
+	max-height: 200px;
+	max-width: 380px;
+	margin: 0 auto;
+}

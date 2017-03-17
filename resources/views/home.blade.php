@@ -8,8 +8,11 @@
         <div id="products" class="row list-group">
              @foreach ($data as $data)
                 <div class="col-xs-4 col-lg-6 item">
-                    <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                    <div class="row padding">
+                        <img class="group list-group-image padding" src="http://placehold.it/400x250/000/fff" alt="" />
+                    </div>
                     <div class="caption">
+                    
 
                         <h3 class="group inner list-group-item-heading"> {{$data['name']}}</h3>
                         <p class="group inner list-group-item-text">

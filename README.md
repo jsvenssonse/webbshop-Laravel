@@ -10,6 +10,41 @@
 <img src="http://sejs.se/portfolio/pic/webbshop-Laravel/image.png" />
 <img src="http://sejs.se/portfolio/pic/webbshop-Laravel/image2.png" />
 
+Create a shopping cart from a shortlist of products.
+The application must be written in PHP with code standard PSR-2 (http://www.php-fig.org/psr/psr-2/)
+
+## Assignment
+# 1. Shopping Cart widget
+Shopping cart widget displays information about the products you have in your cart.
+It should contain
+- Items
+- Total price including VAT
+
+# 2. Product List
+Products are supplied in a JSON file
+In each JSON objects are the following value
+- Code (part)
+- Name (name)
+- VAT (tax percentage eg 25)
+- Price (price excluding VAT)
+
+These should be listed out by name, part number, VAT, price including VAT, number-box and a buy button.
+When you click on purchase, the current article added to the basket with AJAX with the number that you have entered.
+Is the product already in vending Kogen number should be updated.
+Shopping cart widget is updated with the number and total price.
+
+# 3. Basket
+There should be a page where all the items in the cart are listed out by name, part number, quantity, price including VAT, and the total price including VAT.
+You should be able to change the quantity of a product
+You should be able to remove a product
+At the bottom of the page there should be a summary:
+- Total excl.
+- VAT total
+- Total including VAT
+
+# No requirement of CSS is.
+# Optional library for both frontend and backend may be used;
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:

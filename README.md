@@ -13,14 +13,14 @@
 Create a shopping cart from a shortlist of products.
 The application must be written in PHP with code standard PSR-2 (http://www.php-fig.org/psr/psr-2/)
 
-## Assignment
-# 1. Shopping Cart widget
+# Assignment
+### 1. Shopping Cart widget
 Shopping cart widget displays information about the products you have in your cart.
 It should contain
 - Items
 - Total price including VAT
 
-# 2. Product List
+### 2. Product List
 Products are supplied in a JSON file
 In each JSON objects are the following value
 - Code (part)
@@ -33,7 +33,7 @@ When you click on purchase, the current article added to the basket with AJAX wi
 Is the product already in vending Kogen number should be updated.
 Shopping cart widget is updated with the number and total price.
 
-# 3. Basket
+### 3. Basket
 There should be a page where all the items in the cart are listed out by name, part number, quantity, price including VAT, and the total price including VAT.
 You should be able to change the quantity of a product
 You should be able to remove a product
@@ -42,8 +42,8 @@ At the bottom of the page there should be a summary:
 - VAT total
 - Total including VAT
 
-# No requirement of CSS is.
-# Optional library for both frontend and backend may be used;
+### No requirement of CSS is.
+### Optional library for both frontend and backend may be used;
 
 ## About Laravel
 
